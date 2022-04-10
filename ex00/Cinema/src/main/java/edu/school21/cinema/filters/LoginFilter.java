@@ -13,12 +13,12 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        HttpSession session = request.getSession();
-//        HttpSession session = request.getSession(false);
-        String loginPath = request.getRequestURI();
+        // getSession(false) возвращает null
+        HttpSession session = request.getSession(false);
+        String requestURI = request.getRequestURI();
         boolean loggedIn = session != null && session.getAttribute("user") != null;
 
-        if (loggedIn || loginPath.startsWith("/signIn") || loginPath.startsWith("/signUp")) {
+        if (loggedIn || requestURI.startsWith("/signIn") || requestURI.startsWith("/signUp")) {
             filterChain.doFilter(request, response);
         } else {
             response.sendRedirect("/signIn");
