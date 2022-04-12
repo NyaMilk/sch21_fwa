@@ -5,7 +5,6 @@ import edu.school21.cinema.models.User;
 import edu.school21.cinema.repositories.LoginRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 public class LoginServiceImpl implements LoginService {
@@ -42,11 +41,6 @@ public class LoginServiceImpl implements LoginService {
         }
 
         return null;
-    }
-
-    @Override
-    public User findUserByUsername(String firstname) {
-        return userRepository.findByUsername(firstname);
     }
 
     @Override

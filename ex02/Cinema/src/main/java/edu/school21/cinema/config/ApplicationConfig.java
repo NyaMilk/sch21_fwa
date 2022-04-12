@@ -6,6 +6,7 @@ import edu.school21.cinema.services.LoginService;
 import edu.school21.cinema.services.LoginServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
+@ComponentScan("edu.school21.cinema")
 @PropertySource("classpath:application.properties")
 public class ApplicationConfig {
     @Value("${db.url}")

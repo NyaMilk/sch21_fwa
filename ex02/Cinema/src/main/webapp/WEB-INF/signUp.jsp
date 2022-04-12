@@ -33,7 +33,7 @@
     <button type="submit">Sign up</button>
 </form>
 
-</br>
+<br>
 <a href="/signIn">SignIn</a>
 </body>
 

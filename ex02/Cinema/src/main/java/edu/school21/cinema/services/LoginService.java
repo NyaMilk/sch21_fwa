@@ -10,8 +10,6 @@ public interface LoginService {
 
     User findUser(String firstname, String password);
 
-    User findUserByUsername(String firstname);
-
     void saveAuth(Long idUser, String ip);
 
     List<AuthData> getAuth(Long idUser);

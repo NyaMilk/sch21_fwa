@@ -11,9 +11,7 @@ import java.io.IOException;
 public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("Session before invalidate: " + request.getSession(false));
         request.getSession(false).invalidate();
-        System.out.println("Session after invalidate: " + request.getSession(false));
-        request.getRequestDispatcher("/WEB-INF/signIn.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/signIn");
     }
 }
