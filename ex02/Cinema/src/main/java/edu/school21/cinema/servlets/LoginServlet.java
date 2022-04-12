@@ -56,8 +56,10 @@ public class LoginServlet extends HttpServlet {
             throw new ValidException("Wrong password, please try again", JSP_SIGN_IN_PATH);
         } else {
             request.getSession().setAttribute("user", user);
+            loginService.saveAuth(user.getId(), request.getRemoteAddr());
             response.sendRedirect(request.getContextPath() + "/profile");
         }
+
     }
 
     protected void processSignUp(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -66,13 +68,15 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         String phone = request.getParameter("phone");
 
-
         if (username == null || username.isEmpty() || lastname == null || lastname.isEmpty() || password == null || password.isEmpty() || phone == null || phone.isEmpty()) {
             throw new ValidException("You must fill in all of the fields", JSP_SIGN_UP_PATH);
         }
 
-        if (loginService.signUp(new User(username, lastname, password, phone))) {
-            request.getSession().setAttribute("user", username);
+        User user = new User(username, lastname, password, phone);
+
+        if (loginService.signUp(user)) {
+            request.getSession().setAttribute("user", user);
+            loginService.saveAuth(user.getId(), request.getRemoteAddr());
             response.sendRedirect(request.getContextPath() + "/profile");
         } else {
             throw new ValidException("User with name already exists", JSP_SIGN_UP_PATH);

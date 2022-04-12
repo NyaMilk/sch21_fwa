@@ -1,8 +1,12 @@
 package edu.school21.cinema.services;
 
+import edu.school21.cinema.models.AuthData;
 import edu.school21.cinema.models.User;
 import edu.school21.cinema.repositories.LoginRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.sql.Timestamp;
+import java.util.List;
 
 public class LoginServiceImpl implements LoginService {
     private final LoginRepository userRepository;
@@ -22,7 +26,7 @@ public class LoginServiceImpl implements LoginService {
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        user.setId(userRepository.save(user));
         return true;
     }
 
@@ -38,5 +42,20 @@ public class LoginServiceImpl implements LoginService {
         }
 
         return null;
+    }
+
+    @Override
+    public User findUserByUsername(String firstname) {
+        return userRepository.findByUsername(firstname);
+    }
+
+    @Override
+    public void saveAuth(Long idUser, String ip) {
+        userRepository.saveAuthData(idUser, ip);
+    }
+
+    @Override
+    public List<AuthData> getAuth(Long idUser) {
+        return userRepository.getAuthData(idUser);
     }
 }

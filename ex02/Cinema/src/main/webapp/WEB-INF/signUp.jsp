@@ -32,6 +32,9 @@
     </label>
     <button type="submit">Sign up</button>
 </form>
+
+</br>
+<a href="/signIn">SignIn</a>
 </body>
 
 </html>

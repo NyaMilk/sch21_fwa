@@ -14,9 +14,8 @@ CREATE TABLE authentications
 (
     id       bigserial,
     idUser   bigint,
-    date     timestamp,
+    date     timestamp DEFAULT CURRENT_TIMESTAMP,
     ip       text,
-    password text,
     FOREIGN KEY (idUser) REFERENCES users (id),
     PRIMARY KEY (id)
 );

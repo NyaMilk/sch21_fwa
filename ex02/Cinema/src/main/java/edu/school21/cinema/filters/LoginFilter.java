@@ -38,7 +38,8 @@ public class LoginFilter implements Filter {
 //        } else if (!loggedIn && !(requestURI.startsWith("/signIn") || requestURI.startsWith("/signUp"))) {
         } else if (!loggedIn && requestURI.equals("/profile")) {
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
-        } else {
+        }
+        else {
             filterChain.doFilter(request, response);
         }
     }
