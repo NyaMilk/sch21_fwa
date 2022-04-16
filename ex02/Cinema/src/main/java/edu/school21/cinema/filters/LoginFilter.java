@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-//@WebFilter(urlPatterns = {"/signUp", "/signIn"})
 @WebFilter("/*")
 public class LoginFilter implements Filter {
     @Override
@@ -19,27 +18,11 @@ public class LoginFilter implements Filter {
         String requestURI = request.getRequestURI();
         boolean loggedIn = session != null && session.getAttribute("user") != null;
 
-//        if (requestURI.startsWith("/signIn") || requestURI.startsWith("/signUp")) {
-//            if (loggedIn) {
-//                response.sendRedirect(request.getContextPath() + "/profile");
-//            } else {
-//                filterChain.doFilter(request, response);
-//            }
-//        } else {
-//            if (!loggedIn) {
-//                response.sendError(HttpServletResponse.SC_FORBIDDEN);
-//            } else {
-//                filterChain.doFilter(request, response);
-//            }
-//        }
-
         if (loggedIn && (requestURI.equals("/signIn") || requestURI.equals("/signUp"))) {
             response.sendRedirect(request.getContextPath() + "/profile");
-//        } else if (!loggedIn && !(requestURI.startsWith("/signIn") || requestURI.startsWith("/signUp"))) {
         } else if (!loggedIn && requestURI.equals("/profile")) {
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
-        }
-        else {
+        } else {
             filterChain.doFilter(request, response);
         }
     }

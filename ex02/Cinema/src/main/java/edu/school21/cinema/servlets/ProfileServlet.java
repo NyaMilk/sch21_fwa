@@ -2,6 +2,7 @@ package edu.school21.cinema.servlets;
 
 import edu.school21.cinema.models.AuthData;
 import edu.school21.cinema.models.User;
+import edu.school21.cinema.services.ImageService;
 import edu.school21.cinema.services.LoginService;
 import org.springframework.context.ApplicationContext;
 
@@ -17,11 +18,13 @@ import java.util.List;
 @WebServlet("/profile")
 public class ProfileServlet extends HttpServlet {
     private LoginService loginService;
+    private ImageService imageService;
 
     @Override
     public void init(ServletConfig config) {
         ApplicationContext context = (ApplicationContext) config.getServletContext().getAttribute("applicationContext");
         loginService = context.getBean(LoginService.class);
+        imageService = context.getBean(ImageService.class);
     }
 
     @Override
@@ -29,6 +32,7 @@ public class ProfileServlet extends HttpServlet {
         User user = (User) request.getSession().getAttribute("user");
         List<AuthData> authData = loginService.getAuth(user.getId());
         user.setAuthData(authData);
+        user.setPhotos(imageService.getPhotos(user.getId()));
         request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
     }
 }

@@ -14,6 +14,7 @@ public class User {
     private String password;
     private String phone;
     private List<AuthData> authData;
+    private List<Photo> photos;
 
     public User(Long id, String firstname, String lastname, String password, String phone) {
         this.id = id;

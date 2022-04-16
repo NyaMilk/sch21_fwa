@@ -53,6 +53,6 @@ public class LoginRepositoryImpl implements LoginRepository {
 
     @Override
     public List<AuthData> getAuthData(Long id) {
-        return jdbc.query("SELECT * FROM authentications WHERE idUser = ?", new AuthDataMapper(), id);
+        return jdbc.query("SELECT * FROM authentications WHERE idUser = ? ORDER BY ID DESC", new AuthDataMapper(), id);
     }
 }
